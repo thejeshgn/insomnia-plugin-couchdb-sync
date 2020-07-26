@@ -1,14 +1,14 @@
 {
-  "name": "@lion2486/insomnia-plugin-sync",
-  "author": "@lion2486",
-  "homepage": "https://github.com/lion2486/insomnia-plugin-sync",
-  "version": "1.2.2",
+  "name": "@thejeshgn/insomnia-plugin-couchdb-sync",
+  "author": "Thejesh GN",
+  "homepage": "https://github.com/thejeshgn/insomnia-plugin-couchdb-sync",
+  "version": "1.2.3",
   "main": "plugin.js",
   "license": "BEERWARE",
   "insomnia": {
-    "name": "Server sync",
-    "displayName": "Server Sync",
-    "description": "Workspace sync plugin"
+    "name": "CouchDB sync",
+    "displayName": "CouchDB Sync",
+    "description": "CouchDB Workspace sync plugin"
   },
   "dependencies": {
     "axios": "^0.19.2",
