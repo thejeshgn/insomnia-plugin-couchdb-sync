@@ -86,8 +86,9 @@ module.exports.workspaceActions = [
       const workspace = await getWorkspace(context, models)
       await context.store.setItem(storeKey('revision'), revision)
 
-      const _rev = await context.store.getItem(storeKey('_rev'))      
-      
+      let rev_key = models.workspace.name + '_rev'
+      const _rev = await context.store.getItem(storeKey(rev_key))      
+      console.log(rev_key, _rev);
 
       if(_rev){
           const data = {"_id":models.workspace.name, "workspace":workspace, "revision": revision, "_rev": _rev }
@@ -97,7 +98,7 @@ module.exports.workspaceActions = [
           }).then((res) => {
             console.log('insomnia-plugin-sync', 'upload', res)
             console.log('insomnia-plugin-sync', 'upload', res["data"].rev)
-            context.store.setItem(storeKey('_rev'), res["data"].rev)
+            context.store.setItem(storeKey(rev_key), res["data"].rev)
           }).catch((err) => {
             console.error('insomnia-plugin-sync', 'upload', err)
             context.app.alert("Error while uploading")
@@ -110,7 +111,7 @@ module.exports.workspaceActions = [
           }).then((res) => {
             console.log('insomnia-plugin-sync', 'upload', res)
             console.log('insomnia-plugin-sync', 'data', res["data"].rev)
-            context.store.setItem(storeKey('_rev'), res["data"].rev)
+            context.store.setItem(storeKey(rev_key), res["data"].rev)
 
           }).catch((err) => {
             console.error('insomnia-plugin-sync', 'upload', err)
@@ -145,7 +146,10 @@ module.exports.workspaceActions = [
         }
 
         context.store.setItem(storeKey('revision'), data.revision)
-        context.store.setItem(storeKey('_rev'), data._rev)
+        let rev_key = models.workspace.name + '_rev'
+        console.log(data._rev);
+        context.store.setItem(storeKey(rev_key), data._rev)
+
         context.data.import.raw(data.workspace).then((res) => {
           console.log('insomnia-plugin-sync', 'download')
         }).catch((err) => {
